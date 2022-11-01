@@ -3,6 +3,7 @@ package org.senac.aula01.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 public class Carro implements Serializable {
@@ -28,6 +29,12 @@ public class Carro implements Serializable {
     @ManyToOne
     @JoinColumn(name="ID_COR")
     private Cor cor;
+
+    @ManyToMany
+    private List<Acessorio> acessorios;
+
+    @OneToMany(mappedBy = "carro", cascade = CascadeType.ALL)
+    private List<Foto> fotos;
 
     public Long getId() {
         return id;
@@ -75,5 +82,21 @@ public class Carro implements Serializable {
 
     public void setCor(Cor cor) {
         this.cor = cor;
+    }
+
+    public List<Acessorio> getAcessorios() {
+        return acessorios;
+    }
+
+    public void setAcessorios(List<Acessorio> acessorios) {
+        this.acessorios = acessorios;
+    }
+
+    public List<Foto> getFotos() {
+        return fotos;
+    }
+
+    public void setFotos(List<Foto> fotos) {
+        this.fotos = fotos;
     }
 }

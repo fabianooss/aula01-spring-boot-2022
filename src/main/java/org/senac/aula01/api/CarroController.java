@@ -16,6 +16,9 @@ public class CarroController {
 
     @PostMapping
     private void save(@RequestBody Carro carro) {
+        if (carro.getFotos() != null) {
+            carro.getFotos().stream().forEach(f -> f.setCarro(carro));
+        }
         repository.save(carro);
     }
 
